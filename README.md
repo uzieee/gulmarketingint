@@ -33,7 +33,7 @@ npm install
 npm run dev
 ```
 
-Vite will print the local URL (typically `http://localhost:5173`).
+Keep that terminal open while you work. This project uses port **5174** (5173 is often taken by other Vite apps). Open **`http://localhost:5174`** (or the URL Vite prints).
 
 ## Notes
 

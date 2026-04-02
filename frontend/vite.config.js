@@ -6,5 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5174,
+    // Listen on all interfaces (same idea as `vite --host`); avoids some localhost/IPv6 quirks.
+    host: true,
   },
 })
