@@ -1,21 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply font-sans antialiased text-gray-900 bg-gray-50;
+    @apply font-sans antialiased text-slate-200 bg-void-950;
+  }
+  ::selection {
+    @apply bg-cyan-500/30 text-white;
+  }
+}
+
+@layer components {
+  .neo-border {
+    @apply border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)];
+  }
+  .neo-glass {
+    @apply bg-void-850/80 backdrop-blur-xl neo-border;
+  }
+  .neo-glow-text {
+    @apply bg-gradient-to-r from-cyan-200 via-white to-violet-200 bg-clip-text text-transparent;
+  }
+  .neo-btn {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 font-semibold text-void-950 transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0;
+    background: linear-gradient(120deg, #22d3ee, #a5f3fc 45%, #c4b5fd 100%);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+      0 20px 50px -20px rgba(34, 211, 238, 0.45);
+  }
+  .neo-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3 font-semibold text-slate-100 backdrop-blur-sm transition-all hover:border-cyan-400/40 hover:bg-white/10;
+  }
+  .scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.015) 2px,
+      rgba(255, 255, 255, 0.015) 4px
+    );
+    pointer-events: none;
   }
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm;
-  }
-  
-  .glass-dark {
-    @apply bg-gray-900/80 backdrop-blur-md border border-gray-800/50 shadow-lg;
+  .text-balance {
+    text-wrap: balance;
   }
 }

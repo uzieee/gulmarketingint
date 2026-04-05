@@ -1,37 +1,31 @@
-import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Team from './components/Team';
-import Footer from './components/Footer';
+import React, { useEffect } from 'react'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import StatsStrip from './components/StatsStrip'
+import Features from './components/Features'
+import Testimonials from './components/Testimonials'
+import Team from './components/Team'
+import Footer from './components/Footer'
 
 function App() {
-  // Add a slight scroll behavior class for smooth navigation
   useEffect(() => {
-    document.documentElement.classList.add('scroll-smooth');
-    return () => document.documentElement.classList.remove('scroll-smooth');
-  }, []);
+    document.documentElement.classList.add('scroll-smooth')
+    return () => document.documentElement.classList.remove('scroll-smooth')
+  }, [])
 
   return (
-    <div className="min-h-screen font-sans bg-gray-50 text-gray-900 selection:bg-primary-200 selection:text-primary-900 overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-void-950 text-slate-200">
       <Navbar />
       <main>
-        <div id="home">
-          <Hero />
-        </div>
-        
-        {/* Added spacing between sections */}
-        <div className="bg-white" id="categories-section">
-          <Features />
-        </div>
-
-        <div id="team-section">
-          <Team />
-        </div>
+        <Hero />
+        <StatsStrip />
+        <Features />
+        <Testimonials />
+        <Team />
       </main>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

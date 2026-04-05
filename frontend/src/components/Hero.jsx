@@ -1,176 +1,154 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, ChevronRight, ChevronLeft, ShieldCheck, Truck, CreditCard } from 'lucide-react';
+import React, { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
+import { brand, heroSlides, trustBadges } from '../data/content'
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [i, setI] = useState(0)
+  const slide = heroSlides[i]
 
-  const slides = [
-    {
-      title: "Chemistry Analyzer",
-      subtitle: "Shop exclusive diagnostic items",
-      description: "Clinical Chemistry equipment with state-of-the-art accuracy.",
-      discount: "Get up to 20% OFF",
-      tagline: "on special sale",
-      image: "/images/gmi/chemistry_analyzer.png",
-      bgImg: "/images/gmi/lab_background.png"
-    },
-    {
-      title: "Hematology",
-      subtitle: "Shop premium clinical instruments",
-      description: "Advanced hematology analyzers for precise lab results.",
-      discount: "Get up to 20% OFF",
-      tagline: "on special sale",
-      image: "/images/gmi/hematology_analyzer.png",
-      bgImg: "/images/gmi/lab_background.png"
-    },
-    {
-      title: "Clinical Microbiology",
-      subtitle: "Explore modern diagnostic tools",
-      description: "Reliable solutions for rigorous clinical diagnosis and research.",
-      discount: "Get up to 45% OFF",
-      tagline: "on special sale",
-      image: "/images/gmi/microbiology_equip.png",
-      bgImg: "/images/gmi/lab_background.png"
-    }
-  ];
-
-  // Auto advance slides
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    const t = setInterval(() => setI((p) => (p + 1) % heroSlides.length), 6000)
+    return () => clearInterval(t)
+  }, [])
 
   return (
-    <div className="relative pt-24 pb-12 lg:pt-32 lg:pb-24 bg-gradient-to-br from-primary-50 via-white to-primary-100 overflow-hidden">
-      
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 rounded-full bg-primary-200/50 mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-      <div className="absolute bottom-0 left-0 -ml-32 -mb-32 w-96 h-96 rounded-full bg-primary-300/30 mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+    <section id="signal" className="relative min-h-[100svh] overflow-hidden pt-28 pb-16 sm:pt-32">
+      <div className="pointer-events-none absolute inset-0 bg-mesh" />
+      <div
+        className="pointer-events-none absolute inset-0 bg-grid bg-grid-size opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]"
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 scanlines opacity-60" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Main Hero Banner / Carousel */}
-        <div className="relative bg-white rounded-3xl shadow-xl border border-gray-100/50 overflow-hidden flex items-center min-h-[500px] lg:min-h-[600px]">
-          
-          {slides.map((slide, idx) => (
-            <div 
-              key={idx}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out flex flex-col-reverse lg:flex-row items-center ${idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-12 px-4 sm:px-6 lg:px-8 lg:flex-row lg:items-center">
+        <div className="flex-1 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-4 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-cyan-100"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
+            {brand.tagline}
+          </motion.div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.45 }}
+              className="space-y-6"
             >
-              {/* Text Side */}
-              <div className="w-full lg:w-1/2 p-8 lg:p-16 flex flex-col justify-center h-full bg-white/80 backdrop-blur-sm relative z-20">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 text-primary-700 font-semibold text-sm mb-6 w-max border border-primary-100 animate-fade-in shadow-sm">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
-                  </span>
-                  {slide.discount} {slide.tagline}
-                </span>
-                
-                <h1 className="text-4xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-4 leading-tight">
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800">
-                    {slide.title}
-                  </span>
-                </h1>
-                
-                <h2 className="text-xl lg:text-2xl font-medium text-gray-700 mb-6">
-                  {slide.subtitle}
-                </h2>
-                
-                <p className="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">
-                  {slide.description}
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-xl font-bold bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    Shop Now
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <button className="flex items-center justify-center gap-2 bg-white text-gray-700 border-2 border-gray-200 px-8 py-4 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-300 hover:shadow-md transition-all duration-300">
-                    View Catalog
-                  </button>
-                </div>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-violet-300/90">{slide.eyebrow}</p>
+              <h1 className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+                <span className="neo-glow-text">{slide.title}</span>
+              </h1>
+              <p className="max-w-xl text-lg font-medium text-slate-300 sm:text-xl">{slide.subtitle}</p>
+              <p className="max-w-xl text-sm leading-relaxed text-slate-500 sm:text-base">{slide.description}</p>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex flex-wrap gap-3">
+            <a href="#catalog" className="neo-btn">
+              {slide.cta}
+            </a>
+            <a href="#solutions" className="neo-btn-ghost">
+              Solution map
+            </a>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {trustBadges.map((b) => (
+              <div
+                key={b.title}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm"
+              >
+                <p className="text-sm font-semibold text-white">{b.title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-slate-500">{b.body}</p>
               </div>
-
-              {/* Image Side */}
-              <div className="w-full lg:w-1/2 h-64 lg:h-full relative overflow-hidden group">
-                <div className="absolute inset-0 bg-primary-900/10 z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-                <img 
-                  src={slide.bgImg} 
-                  alt={slide.title}
-                  className="absolute inset-0 w-full h-full object-cover object-center transform scale-105 group-hover:scale-100 transition-transform duration-700"
-                />
-                
-                {/* Foreground Product Image (Floating effect) */}
-                <div className="absolute inset-0 z-20 flex items-center justify-center p-8 backdrop-blur-sm bg-white/10 hidden lg:flex">
-                   <img 
-                     src={slide.image} 
-                     alt={`${slide.title} Product`}
-                     className="w-auto max-h-[80%] rounded-xl shadow-2xl transform  hover:scale-105 transition-transform duration-500 hover:-rotate-1 border-4 border-white"
-                     onError={(e) => e.target.style.display='none'}
-                   />
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {/* Controls */}
-          <div className="absolute bottom-6 left-1/2 lg:left-8 -translate-x-1/2 lg:translate-x-0 z-30 flex items-center gap-3 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-gray-100">
-            <button onClick={prevSlide} className="p-2 rounded-full hover:bg-white text-gray-600 hover:text-primary-600 transition-colors">
-              <ChevronLeft size={24} />
-            </button>
-            <div className="flex gap-2">
-              {slides.map((_, idx) => (
-                <button 
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentSlide ? 'bg-primary-600 w-6' : 'bg-gray-300 hover:bg-primary-400'}`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-            <button onClick={nextSlide} className="p-2 rounded-full hover:bg-white text-gray-600 hover:text-primary-600 transition-colors">
-              <ChevronRight size={24} />
-            </button>
-          </div>
-          
-        </div>
-
-        {/* Feature Badges Below Hero */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg border border-white hover:border-primary-100 transition-colors shadow-primary-500/5 group hover:-translate-y-1 duration-300">
-            <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 mb-4 group-hover:scale-110 transition-transform">
-              <ShieldCheck size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">30 Days Replacement</h3>
-            <p className="text-gray-500 font-medium">Guaranteeing quality for every product</p>
-          </div>
-          
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg border border-white hover:border-primary-100 transition-colors shadow-primary-500/5 group hover:-translate-y-1 duration-300">
-            <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 mb-4 group-hover:scale-110 transition-transform">
-              <Truck size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Free Shipping</h3>
-            <p className="text-gray-500 font-medium">Fast and reliable worldwide delivery</p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg border border-white hover:border-primary-100 transition-colors shadow-primary-500/5 group hover:-translate-y-1 duration-300">
-            <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 mb-4 group-hover:scale-110 transition-transform">
-              <CreditCard size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Secure Payments</h3>
-            <p className="text-gray-500 font-medium">100% secure payment transactions</p>
+            ))}
           </div>
         </div>
 
+        <div className="relative flex-1">
+          <div className="relative mx-auto aspect-square max-w-lg lg:max-w-none">
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-cyan-500/20 via-transparent to-violet-600/25 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-void-850/90 shadow-card">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={slide.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="relative aspect-square"
+                >
+                  <img
+                    src={slide.bg}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover opacity-40"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${slide.accent} mix-blend-screen opacity-30`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-void-950 via-void-950/20 to-transparent" />
+                  <div className="absolute inset-0 flex items-center justify-center p-8 sm:p-12">
+                    <motion.img
+                      initial={{ scale: 0.92, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+                      src={slide.image}
+                      alt={slide.title}
+                      className="max-h-[78%] w-auto object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,0.65)]"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-void-950/80 p-4 backdrop-blur-md sm:p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-widest text-slate-500">Live preview</p>
+                        <p className="text-sm font-semibold text-white">{brand.shortName} · {slide.id}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setI((p) => (p - 1 + heroSlides.length) % heroSlides.length)}
+                          className="rounded-xl border border-white/10 bg-white/5 p-2 text-slate-200 hover:border-cyan-400/40"
+                          aria-label="Previous"
+                        >
+                          <ChevronLeft size={20} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setI((p) => (p + 1) % heroSlides.length)}
+                          className="rounded-xl border border-white/10 bg-white/5 p-2 text-slate-200 hover:border-cyan-400/40"
+                          aria-label="Next"
+                        >
+                          <ChevronRight size={20} />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="mt-3 flex gap-1.5">
+                      {heroSlides.map((_, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setI(idx)}
+                          className={`h-1 flex-1 rounded-full transition-all ${
+                            idx === i ? 'bg-cyan-400 shadow-[0_0_12px_#22d3ee]' : 'bg-white/10 hover:bg-white/20'
+                          }`}
+                          aria-label={`Slide ${idx + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  );
-};
+    </section>
+  )
+}
 
-export default Hero;
+export default Hero
