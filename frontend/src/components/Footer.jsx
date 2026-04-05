@@ -1,95 +1,150 @@
 import React from 'react'
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react'
-import { brand, contact, navLinks } from '../data/content'
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const Footer = () => (
-  <footer id="contact" className="relative border-t border-white/10 bg-void-950 pt-20 pb-10">
-    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+  <footer className="bg-gray-900 text-gray-300 pt-20 pb-10 border-t-4 border-primary-600 font-sans" id="profile">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16"
+      >
+        <div className="space-y-6">
           <div className="flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/20 to-violet-500/25 ring-1 ring-white/10">
-              <span className="font-mono text-sm font-bold text-cyan-100">{brand.shortName}</span>
-            </span>
-            <div>
-              <p className="text-lg font-bold text-white">{brand.name}</p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">Static react · 2026</p>
-            </div>
+            <img
+              src="/images/gmi/logo.png"
+              alt="GMI Logo"
+              className="h-12 w-auto object-contain bg-white/10 p-1 rounded-lg"
+              onError={(e) => {
+                e.target.onerror = null
+                e.target.style.display = 'none'
+                e.target.nextElementSibling.style.display = 'block'
+              }}
+            />
+            <span className="hidden font-bold text-2xl tracking-tight text-white">Gulf Marketing Int.</span>
           </div>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-slate-400">{brand.description}</p>
-          <a href="#catalog" className="neo-btn mt-8 inline-flex">
-            Open catalog
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          <p className="text-gray-400 leading-relaxed text-sm">
+            Delivering high-quality clinical diagnostic equipment and premium laboratory instruments with trusted reliability across the region.
+          </p>
+          <div className="flex items-center gap-4 pt-2">
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300 shadow-md"
+            >
+              <Facebook size={18} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300 shadow-md"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300 shadow-md"
+            >
+              <Linkedin size={18} />
+            </a>
+          </div>
         </div>
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:col-span-7">
-          <div>
-            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-slate-500">Navigate</h3>
-            <ul className="mt-4 space-y-2">
-              {navLinks.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="group inline-flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-200"
-                  >
-                    <ArrowRight className="h-3.5 w-3.5 text-cyan-500/0 transition-all group-hover:translate-x-0.5 group-hover:text-cyan-400" />
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div>
+          <h3 className="text-white font-bold text-lg mb-6 tracking-wide uppercase text-sm border-b border-gray-800 pb-3">Categories</h3>
+          <ul className="space-y-4">
+            <li>
+              <a
+                href="#microbiology"
+                className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300"
+              >
+                <ArrowRight size={14} className="mr-2 text-primary-500" /> Clinical Microbiology
+              </a>
+            </li>
+            <li>
+              <a href="#hematology" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
+                <ArrowRight size={14} className="mr-2 text-primary-500" /> Hematology
+              </a>
+            </li>
+            <li>
+              <a href="#chemistry" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
+                <ArrowRight size={14} className="mr-2 text-primary-500" /> Chemistry
+              </a>
+            </li>
+            <li>
+              <a href="#team" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
+                <ArrowRight size={14} className="mr-2 text-primary-500" /> Our Team
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          <div className="space-y-4">
-            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-slate-500">Contact</h3>
-            <div className="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-300">
-                <MapPin size={20} />
+        <div className="lg:col-span-2">
+          <h3 className="text-white font-bold text-lg mb-6 tracking-wide uppercase text-sm border-b border-gray-800 pb-3">Contact Us</h3>
+          <div className="space-y-6">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-gray-800/50 hover:bg-gray-800 transition-colors border border-gray-800">
+              <div className="p-3 bg-primary-900/50 rounded-lg text-primary-400">
+                <MapPin size={24} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Office</p>
-                <p className="mt-1 text-sm leading-relaxed text-slate-400">
-                  {contact.addressLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
+                <h4 className="text-white font-semibold mb-1">Office Address</h4>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Office # 11 B2 Satellite Town, Abdulah Jan Masjid Road, <br />
+                  Near Kali Tanki Saidpur Road, Rawalpindi, Pakistan
                 </p>
               </div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-violet-300" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-800/50 hover:bg-gray-800 transition-colors border border-gray-800">
+                <div className="p-3 bg-primary-900/50 rounded-lg text-primary-400">
+                  <Phone size={20} />
+                </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Phone</p>
-                  {contact.phones.map((p) => (
-                    <p key={p} className="text-sm text-slate-400">
-                      {p}
-                    </p>
-                  ))}
+                  <h4 className="text-white font-semibold mb-1 text-sm">Phone</h4>
+                  <p className="text-gray-400 text-sm">
+                    +92-51-4426080
+                    <br />
+                    +92-51-4426587
+                  </p>
                 </div>
               </div>
-              <div className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <Mail className="mt-0.5 h-5 w-5 shrink-0 text-fuchsia-300" />
+
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-800/50 hover:bg-gray-800 transition-colors border border-gray-800 overflow-hidden">
+                <div className="p-3 bg-primary-900/50 rounded-lg text-primary-400">
+                  <Mail size={20} />
+                </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Email</p>
-                  {contact.emails.map((e) => (
-                    <a key={e} href={`mailto:${e}`} className="block text-sm text-slate-400 hover:text-cyan-200">
-                      {e}
+                  <h4 className="text-white font-semibold mb-1 text-sm">Email</h4>
+                  <p className="text-gray-400 text-sm truncate">
+                    <a href="mailto:Gmi786@yahoo.com" className="hover:text-primary-400">
+                      Gmi786@yahoo.com
                     </a>
-                  ))}
+                    <br />
+                    <a href="mailto:Gmi786@gmail.com" className="hover:text-primary-400">
+                      Gmi786@gmail.com
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-500 md:flex-row">
-        <p>© {new Date().getFullYear()} {brand.name}. All rights reserved.</p>
-        <p className="font-mono text-xs">No backend · Pure display layer</p>
+      <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-gray-500 text-sm tracking-wide">
+          © {new Date().getFullYear()} Gulf Marketing International. All rights reserved. | Design by GMI.
+        </p>
+        <div className="flex gap-6 text-sm">
+          <a href="#" className="hover:text-white transition-colors">
+            Privacy Policy
+          </a>
+          <a href="#" className="hover:text-white transition-colors">
+            Terms of Service
+          </a>
+        </div>
       </div>
     </div>
   </footer>

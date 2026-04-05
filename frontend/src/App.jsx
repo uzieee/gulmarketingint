@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import StatsStrip from './components/StatsStrip'
 import Features from './components/Features'
-import Testimonials from './components/Testimonials'
 import Team from './components/Team'
 import Footer from './components/Footer'
 
@@ -14,14 +12,20 @@ function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-void-950 text-slate-200">
+    <div className="min-h-screen font-sans bg-gray-50 text-gray-900 selection:bg-primary-200 selection:text-primary-900 overflow-x-hidden">
       <Navbar />
       <main>
-        <Hero />
-        <StatsStrip />
-        <Features />
-        <Testimonials />
-        <Team />
+        <div id="home">
+          <Hero />
+        </div>
+
+        <div className="bg-white" id="categories-section">
+          <Features />
+        </div>
+
+        <div id="team-section">
+          <Team />
+        </div>
       </main>
       <Footer />
     </div>
