@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -8,21 +9,21 @@ const Features = () => {
       title: 'Clinical Microbiology',
       description: 'State-of-the-art microbiology testing solutions and systems.',
       image: '/images/gmi/microbiology_equip.png',
-      link: '#microbiology',
+      path: '/clinical-microbiology',
       color: 'from-blue-500 to-indigo-600',
     },
     {
       title: 'Hematology',
       description: 'Precision hematology analyzers for reliable complete blood counts.',
       image: '/images/gmi/hematology_analyzer.png',
-      link: '#hematology',
+      path: '/hematology',
       color: 'from-rose-500 to-red-600',
     },
     {
       title: 'Chemistry',
       description: 'Automated clinical chemistry analyzers designed for high throughput.',
       image: '/images/gmi/chemistry_analyzer.png',
-      link: '#chemistry',
+      path: '/chemistry',
       color: 'from-teal-500 to-emerald-600',
     },
   ]
@@ -54,28 +55,28 @@ const Features = () => {
               Browse our exclusive, high-performance diagnostic machinery and instruments tailored for modern clinics.
             </p>
           </div>
-          <button
-            type="button"
+          <Link
+            to="/clinical-microbiology"
             className="flex-shrink-0 flex items-center gap-2 text-primary-600 hover:text-primary-800 font-semibold group transition-all"
           >
-            View All Categories
+            Dedicated category pages
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </button>
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-          {categories.map((cat, idx) => {
-            const anchorId = cat.link.replace('#', '')
-            return (
-              <motion.a
-                key={cat.title}
-                href={cat.link}
-                id={anchorId}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: idx * 0.08, duration: 0.45 }}
-                className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gray-100 min-h-[400px] scroll-mt-28"
+          {categories.map((cat, idx) => (
+            <motion.div
+              key={cat.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: idx * 0.08, duration: 0.45 }}
+              className="min-h-[400px]"
+            >
+              <Link
+                to={cat.path}
+                className="group relative block rounded-3xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gray-100 min-h-[400px] scroll-mt-28"
               >
                 <div className="absolute inset-0 w-full h-full">
                   <img
@@ -97,12 +98,12 @@ const Features = () => {
                     {cat.description}
                   </p>
                   <div className="mt-6 flex items-center text-white font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-200">
-                    Explore Now <ArrowUpRight className="ml-2 w-5 h-5" />
+                    Explore full page <ArrowUpRight className="ml-2 w-5 h-5" />
                   </div>
                 </div>
-              </motion.a>
-            )
-          })}
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
         <motion.div
@@ -141,12 +142,12 @@ const Features = () => {
                 </div>
 
                 <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity duration-300 flex items-center justify-center">
-                  <button
-                    type="button"
+                  <a
+                    href={`mailto:Gmi786@gmail.com?subject=${encodeURIComponent(`GMI inquiry: ${item.name}`)}`}
                     className="bg-primary-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-primary-700 hover:scale-105 transition-all"
                   >
-                    Quick View
-                  </button>
+                    Request details
+                  </a>
                 </div>
               </div>
 

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Features from './components/Features'
-import Team from './components/Team'
-import Footer from './components/Footer'
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import HomePage from './pages/HomePage'
+import CategoryPage from './pages/CategoryPage'
 
 function App() {
   useEffect(() => {
@@ -12,23 +11,14 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen font-sans bg-gray-50 text-gray-900 selection:bg-primary-200 selection:text-primary-900 overflow-x-hidden">
-      <Navbar />
-      <main>
-        <div id="home">
-          <Hero />
-        </div>
-
-        <div className="bg-white" id="categories-section">
-          <Features />
-        </div>
-
-        <div id="team-section">
-          <Team />
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/clinical-microbiology" element={<CategoryPage />} />
+        <Route path="/hematology" element={<CategoryPage />} />
+        <Route path="/chemistry" element={<CategoryPage />} />
+      </Route>
+    </Routes>
   )
 }
 

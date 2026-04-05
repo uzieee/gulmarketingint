@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronRight, ChevronLeft, ShieldCheck, Truck, CreditCard } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -14,6 +15,7 @@ const Hero = () => {
       tagline: 'on special sale',
       image: '/images/gmi/chemistry_analyzer.png',
       bgImg: '/images/gmi/lab_background.png',
+      detailPath: '/chemistry',
     },
     {
       title: 'Hematology',
@@ -23,6 +25,7 @@ const Hero = () => {
       tagline: 'on special sale',
       image: '/images/gmi/hematology_analyzer.png',
       bgImg: '/images/gmi/lab_background.png',
+      detailPath: '/hematology',
     },
     {
       title: 'Clinical Microbiology',
@@ -32,6 +35,7 @@ const Hero = () => {
       tagline: 'on special sale',
       image: '/images/gmi/microbiology_equip.png',
       bgImg: '/images/gmi/lab_background.png',
+      detailPath: '/clinical-microbiology',
     },
   ]
 
@@ -90,19 +94,19 @@ const Hero = () => {
                 <p className="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">{slide.description}</p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button
-                    type="button"
+                  <Link
+                    to={slide.detailPath}
                     className="group flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                   >
-                    Shop Now
+                    Explore this range
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <button
-                    type="button"
+                  </Link>
+                  <Link
+                    to="/#categories"
                     className="flex items-center justify-center gap-2 bg-white text-gray-700 border-2 border-gray-200 px-8 py-4 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-300 hover:shadow-md transition-all duration-300"
                   >
-                    View Catalog
-                  </button>
+                    View catalog
+                  </Link>
                 </div>
               </div>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -55,27 +56,27 @@ const Footer = () => (
           <h3 className="text-white font-bold text-lg mb-6 tracking-wide uppercase text-sm border-b border-gray-800 pb-3">Categories</h3>
           <ul className="space-y-4">
             <li>
-              <a
-                href="#microbiology"
+              <Link
+                to="/clinical-microbiology"
                 className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300"
               >
                 <ArrowRight size={14} className="mr-2 text-primary-500" /> Clinical Microbiology
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#hematology" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
+              <Link to="/hematology" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
                 <ArrowRight size={14} className="mr-2 text-primary-500" /> Hematology
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#chemistry" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
+              <Link to="/chemistry" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
                 <ArrowRight size={14} className="mr-2 text-primary-500" /> Chemistry
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#team" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
+              <Link to="/#team" className="hover:text-primary-400 hover:translate-x-1 inline-flex items-center transition-all duration-300">
                 <ArrowRight size={14} className="mr-2 text-primary-500" /> Our Team
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
